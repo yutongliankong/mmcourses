@@ -2,7 +2,15 @@
 
 <cfcomponent>
 	<!--- walkthrough 2-1: Configure application settings --->
-	
+	<cfset this.name="acfd700_walkthrough" >
+	<cfset this.sessionManagement="true" >
+	<cfset this.sessionTimeout=createTimeSpan(0, 0, 20, 0) >
+	<cfset this.clientManagement="false" >
+	<cfset this.loginStorage="Session" >
+	<cfset this.setDomainCookies="Yes" >
+	<cfset this.scriptprotect="None" >
+	<cfset this.applicationTimeout=createTimeSpan(0, 1, 0, 0) >
+
 	
 	
 	
