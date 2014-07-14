@@ -1,0 +1,26 @@
+<cfquery name="insData" datasource="acfd700-lab">
+		insert into Contact
+		(Lastname,
+		Firstname,
+		email,
+		address1,
+		address2,
+		city,
+		state,
+		zipcode,
+		homephone,
+		cellphone,
+		bizphone)
+		VALUES
+		(<cfqueryparam cfsqltype="cf_sql_varchar" value="#qContacts.Lastname#">,
+		<cfqueryparam cfsqltype="cf_sql_varchar" value="#qContacts.Firstname#">,
+		<cfqueryparam cfsqltype="cf_sql_varchar" value="#qContacts.email#">,
+		<cfqueryparam cfsqltype="cf_sql_varchar" value="#qContacts.address1#">,
+		<cfqueryparam cfsqltype="cf_sql_varchar" value="#qContacts.address2#">,
+		<cfqueryparam cfsqltype="cf_sql_varchar" value="#qContacts.city#">,
+		<cfqueryparam cfsqltype="cf_sql_varchar" value="#qContacts.state#">,
+		<cfqueryparam cfsqltype="cf_sql_varchar" value="#qContacts.zipcode#">,
+		<cfqueryparam cfsqltype="cf_sql_varchar" value="#qContacts.homephone#">,
+		<cfqueryparam cfsqltype="cf_sql_varchar" value="#qContacts.cellphone#">,
+		<cfqueryparam cfsqltype="cf_sql_varchar" value="#qContacts.bizphone#">)
+	</cfquery>

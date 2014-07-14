@@ -1,0 +1,16 @@
+	select dish.dishname, 
+	   dish.dishid,
+	   dish.dishDescription,
+	   dishtype.dishtypename,
+	   menutype.menutype,
+	   menudish.price,
+	   menudish.specialprice
+	from	dish inner join dishtype on 
+		  dish.dishtypeid = dishtype.dishtypeid
+		inner join menudish on 
+		  menudish.dishid = dish.dishid
+		inner join menutype on
+		  menudish.menutypeid = menutype.menutypeid
+order by dishtype.dishtypesortorder,
+menutype.menutypesortorder
+

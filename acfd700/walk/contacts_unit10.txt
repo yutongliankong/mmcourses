@@ -1,0 +1,7 @@
+firstname,lastname,email,zip,phone
+Bess,Storch,bstorch@cafetownsend.com,20342,301-555-7777
+Chip,Temm,ctemm@cafetownsend.com,20384,202-555-1212
+Warren,Gordon,wgordon@cafetownsend.com,23866,301-555-1212
+Aidan,Drucker,adrucker@cafetownsend.com,87732,344-555-1212
+Robb,Munn,rmunn@cafetownsend.com,23686,202-555-1246
+James,Graham,jgraham@cafetownsend.com,86554,202-756-3723

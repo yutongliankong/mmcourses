@@ -1,0 +1,4 @@
+Invalid character (+) encountered while parsing (tag "CFSET" with attributes a=b). 
+Invalid character ([) encountered while parsing (tag "CFSET" with attributes). 
+Invalid character ([) encountered while parsing (tag "CFSET" with attributes). 
+Invalid character (+) encountered while parsing (tag "CFSET" with attributes c=a). 

@@ -1,0 +1,12 @@
+<cfset application.cfc.reservation = createObject("component","#application.cfcpath#reservation").init(application.datasource)>
+<cfset application.cfc.restaurantmenu = createObject("component","#application.cfcpath#restaurantmenu").init(application.datasource)>
+<cfset application.cfc.contact = createObject("component","#application.cfcpath#contact").init(application.datasource)>
+<cfset application.cfc.reservationorder = createObject("component","#application.cfcpath#reservationorder").init(application.datasource)>
+<cfset application.cfc.template = createObject("component","#application.cfcpath#template").init(application.datasource)>
+<cfset application.cfc.directory = createObject("component","#application.cfcpath#directory").init(application.datasource)>
+<cfset application.cfc.category = createObject("component","#application.cfcpath#category").init(application.datasource)>
+<cfset application.cfc.displayhandler = createObject("component","#application.cfcpath#displayhandler").init(application.datasource)>
+<cfset application.cfc.page = createObject("component","#application.cfcpath#page").init(application.datasource, application.basepath, "http://" & cgi.http_host & application.basehref)>
+<cfset application.cfc.recordlock = createObject("component","#application.cfcpath#recordlock").init()>
+<cfset application.cfc.administrator = createObject("component","#application.cfcpath#administrator").init(application.datasource)>
+<cfset application.cfc.article = createObject("component","#application.cfcpath#article").init(application.datasource, application.basepath & "xsl\", application.verityarticlecollection)>

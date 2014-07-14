@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns="http://purl.org/rss/1.0/" xmlns:admin="http://webns.net/mvcb/" xmlns:ag="http://purl.org/rss/1.0/modules/aggregation/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+<channel rdf:about="Cafe Townsend News">
+<title>Cafe Townsend News</title>
+<link>http://localhost:8500/mmcourses/acfd700/lab/Application/News/index.cfm</link>
+<description>
+Cafe Townsend - In the News
+</description>
+				
+<item rdf:about="http://localhost:8500/mmcourses/acfd700/lab/Application/news/newsdisplay.cfm?articleid=#qArticles.ArticleID#">
+<title>#qArticles.Title#</title>
+<link>http://localhost:8500/mmcourses/acfd700/lab/Application/news/newsdisplay.cfm?articleid=#qArticles.ArticleID#</link>
+<description>
+#qArticles.Teaser#
+</description>
+</item>
+				
+</channel>
+</rdf:RDF>
