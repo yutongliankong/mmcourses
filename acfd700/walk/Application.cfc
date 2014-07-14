@@ -35,6 +35,28 @@
 		<cflog file="#this.name#" type="information" text="application shutdown">
 	</cffunction>
 	
+	<!--- onRequestStart event--->
+	<cffunction name="onRequestStart" returntype="Boolean">
+		<cfargument name="targetpage" type="String" required="true">
+		<cfif isDefined("URL.init")>
+			<cfset onApplicationStart()>
+
+		</cfif>
+		<cfreturn true>
+	</cffunction>
+
+
+	<!--- onrequest event--->
+	<cffunction name="onRequest" returntype="Boolean">
+		<cfargument name="targetpage" type="String" required="true">
+		<cfif NOT application.maintenancemode OR application.lAdministratorIPs CONTAINS cgi.REMOTE_ADDR>
+			<cfinclude template="#arguments.targetpage#">
+		<cfelse>
+			<cfinclude template="#application.basehref#/systemdown.cfm">
+		</cfif>
+		<cfreturn true>
+	</cffunction>
+
 	<!--- general support function --->
 	<cffunction name="findfile" access="private" returntype="string">
 		<cfargument type="string" name="filename" required="yes">
