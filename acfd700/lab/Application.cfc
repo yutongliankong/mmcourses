@@ -1,6 +1,6 @@
 <cfcomponent>	
 	<!--- Unit 2 lab: Application preferences --->
-	<cfset this.name = "acfd700_lab2">
+	<cfset this.name = "acfd700_lab">
 	<cfset this.sessionmanagement = "true">
 	
 	<!--- findfile support function to location application.ini file on disk --->
@@ -85,7 +85,7 @@
 
 	<cffunction name="onSessionStart" returntype="void">
 		<cflock name="cafetownsendlab_activesessions" type="exclusive" timeout="5">
-			<cfset arguments.AppScope.activeSessions = arguments.AppScope.activeSessions + 1>
+			<cfset application.activeSessions = application.activeSessions + 1>
 		</cflock>
 		
 		<!--- unit 2 lab --->
