@@ -16,13 +16,14 @@
 <br>
 
 <!--- STEP 3: Make new query, change one item, and dump both structures --->
+<cfset qNew = qContacts>
+<cfset querySetCell(qNew,"lastname","Ronghuan", 2)>
 
 
 
-<!---
 <cfdump var="#qContacts#" label="Original">
 <cfdump var="#qNew#" label="New">
---->
+
 
 <br>
 <br>
@@ -37,12 +38,13 @@
 <br>
 <br>
 <!--- STEP 7: Make new array, change one item, and dump both structures --->
+<cfset aNew = aComp >
+<cfset aNew[2] = "Ronghuan Zhao">
 
 
-<!---
 <cfdump var="#aComp#" label="Original">
 <cfdump var="#aNew#" label="New">
---->
+
 <br>
 <br>
 <br>
@@ -58,11 +60,12 @@
 <br>
 <br>
 <!--- STEP 11: Make new structure, change one item, and dump both structures --->
+<cfset stNew = stComp>
+<cfset stNew.fname = "Zhao">
 
-
-<!--- <cfdump var="#stComp#" label="Original">
+<cfdump var="#stComp#" label="Original">
 <cfdump var="#stNew#" label="New">
- --->
+
  
  <!--- Restore original structure --->
 <cfset stComp.fname = "Ada">
@@ -73,10 +76,11 @@
 <br>
 <br>
 <!--- STEP 15: Duplicate a structure, change one item, and dump both structures --->
+<cfset stDup = duplicate(stComp)>
+<cfset stDup.fname = "Ronghuan">
 
-
-<!--- <cfdump var="#stComp#" label="Original">
-<cfdump var="#stDup#" label="Duplicated"> --->
+<cfdump var="#stComp#" label="Original">
+<cfdump var="#stDup#" label="Duplicated"> 
 
 
 </body>
