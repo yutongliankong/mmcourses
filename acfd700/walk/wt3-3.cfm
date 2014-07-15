@@ -15,24 +15,26 @@
 <cfset updateuser = "Anonymous">
 
 <!--- update process --->
-
-			<cfquery datasource="acfd700-lab">
-				delete 
-				from reservation
-				where contactid = <cfqueryparam cfsqltype="cf_sql_integer" value="#contactid#">
-				and reservationdatetime = <cfqueryparam cfsqltype="cf_sql_timestamp" value="#date#">		
-			</cfquery>	
-		
-			<cfquery datasource="acfd700-lab">
-				insert into reservations (contactid, reservationdatetime,numberinparty,barrived,updateuser)
-				values (
-					<cfqueryparam cfsqltype="cf_sql_integer" value="#contactid#">,
-					<cfqueryparam cfsqltype="cf_sql_date" value="#newdate#">,
-					<cfqueryparam cfsqltype="cf_sql_integer" value="#numberinparty#">,
-					<cfqueryparam cfsqltype="cf_sql_bit" value="#barrived#">,
-					<cfqueryparam cfsqltype="cf_sql_varchar" value="#updateuser#">				
-				)	
-			</cfquery>
+<cftransaction>
+	<cfquery datasource="acfd700-lab">
+		delete 
+		from reservation
+		where contactid = <cfqueryparam cfsqltype="cf_sql_integer" value="#contactid#">
+		and reservationdatetime = <cfqueryparam cfsqltype="cf_sql_timestamp" value="#date#">		
+	</cfquery>	
+	<cftransaction action="commit" />
+	<cfquery datasource="acfd700-lab">
+		insert into reservations (contactid, reservationdatetime,numberinparty,barrived,updateuser)
+		values (
+			<cfqueryparam cfsqltype="cf_sql_integer" value="#contactid#">,
+			<cfqueryparam cfsqltype="cf_sql_date" value="#newdate#">,
+			<cfqueryparam cfsqltype="cf_sql_integer" value="#numberinparty#">,
+			<cfqueryparam cfsqltype="cf_sql_bit" value="#barrived#">,
+			<cfqueryparam cfsqltype="cf_sql_varchar" value="#updateuser#">				
+		)	
+	</cfquery>
+</cftransaction>
+			
 
 
 </body>
