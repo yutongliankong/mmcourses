@@ -33,7 +33,17 @@
 
 
 <!--- wt 3-2 code starts here --->
-
-
+<!-- <cfdump var="#qgetspecials#"> -->
+<h2>Menu Specials</h2>
+<cfoutput query="qgetspecials" group="menutype">
+	<h3>#qgetspecials.menutype#</h3>
+	<cfoutput group="dishtypename">
+		<h4>#qgetspecials.dishtypename#</h4>
+		<cfoutput>
+			<strong>#qgetspecials.dishname#  #dollarFormat(qgetspecials.price)#</strong><br />
+			#paragraphFormat(qgetspecials.dishdescription)#
+		</cfoutput>
+	</cfoutput>
+</cfoutput>
 </body>
 </html>
