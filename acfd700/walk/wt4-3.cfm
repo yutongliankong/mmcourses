@@ -14,8 +14,8 @@
 		<cfloop from="1" to="#form.rc#" index="i">
 			
 			<!--- step 4 : evaluate variables --->
-			
-			
+			<cfset categoryname = Form["categoryname#i#"]>
+			<cfset categoryid = evaluate("Form.categoryid#i#")>
 			<!--- step 5 --->
 
 			
@@ -55,7 +55,7 @@
 </cfquery>
 
 <!--- step 7: add empty rows for new records using queryaddrow()--->
-
+<cfset queryAddRow(qcategory, 3)>
 <h1>Edit Content Categories</h1>
 <cfform>
 	<cfinput type="hidden" name="rc" value="#qcategory.recordcount#" />
