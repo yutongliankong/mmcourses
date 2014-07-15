@@ -13,13 +13,39 @@
 		
 
 		<!--- Step 9 Goes Here --->
+		<cfquery datasource="acfd700-lab">
+			DELETE 
+			FROM articlecategory
+			WHERE articleid = <cfqueryparam value="#Form.articleid#" cfsqltype="cf_sql_integer">
+		</cfquery>
+
+
 		
 
 		
 		<!--- End Step 9 --->
 		
 		<!--- Step 11 Goes Here --->
-		
+
+		<!--- the comment must be wraped by three dashes, otherwise it will be process too--->
+		<!--- <cfloop list="#Form.categoryid#" index="i">
+			<cfquery datasource="acfd700-lab">
+				INSERT INTO articlecategory (articleid, categoryid)
+				VALUES (
+					<cfqueryparam value="#Form.articleid#" cfsqltype="cf_sql_integer">,
+					<cfqueryparam value="#variables.i#" cfsqltype="cf_sql_integer">
+				)
+			</cfquery>
+		</cfloop> --->
+
+	<cfquery datasource="acfd700-lab">
+		INSERT INTO articlecategory (articleid, categoryid)
+		SELECT <cfqueryparam value="#Form.articleid#" cfsqltype="cf_sql_integer"> as articleid, categoryid
+		FROM category
+		WHERE categoryid in (
+			<cfqueryparam value="#Form.categoryid#" cfsqltype="cf_sql_integer" list="yes">
+		)
+	</cfquery> 
 
 		
 		<!--- End Step 11 --->
@@ -48,7 +74,7 @@
 </cfquery>	
 
 <!--- Step 4 Goes Here--->
-
+<cfset larticlecategories = valueList(qarticlecategories.categoryid) >
 <!--- end step 4 --->
 
 
@@ -84,7 +110,11 @@
 			<cfoutput query="qcategories">
 				<input type="checkbox" 
 				name="categoryid" 
-				value="#qcategories.categoryid#"<!--- Step 5 Goes Here ---> <!--- end step 5 --->  />
+				value="#qcategories.categoryid#"<!--- Step 5 Goes Here ---> <!--- end step 5 ---> 
+					<cfif listFind(variables.larticlecategories, qcategories.categoryid) GT 0>
+						checked
+					</cfif>
+				 />
 				#qcategories.categoryname#<br />
 			</cfoutput>
 			
