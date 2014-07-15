@@ -63,7 +63,7 @@
 		<cfreturn true>
 	</cffunction>
 	
-	<cffunction name="onRequest" returntype="boolean">
+<!--- 	<cffunction name="onRequest" returntype="boolean">
 		<cfargument name="targetpage" type="String" required="true"/>
 		<cfif NOT application.maintenancemode or application.lAdministratorIPs contains cgi.REMORE_ADDR>
 			<cfinclude template="#arguments.targetpage#">
@@ -71,7 +71,7 @@
 			<cfinclude template="#application.basehref#systemdown.cfm" >
 		</cfif>
 		<cfreturn true>
-	</cffunction> 
+	</cffunction> ---> 
 	
 	<cffunction name="onSessionEnd" returntype="void">
 		<cfargument name="SessionScope" required="True" />
