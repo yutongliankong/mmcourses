@@ -9,10 +9,10 @@
 
 <cfif not isdefined("form.btnSubmit")>
 	<!--- step 3: Modify cfform --->
-	<cfform>
+	<cfform enctype="multipart/form-data">
 		Select file to upload: 
 		<!--- step 4: add cfinput tag for file uploading --->
-		
+		<cfinput type="file" name="datafile" >
 		<br />
 		<br />
 		<cfinput type="submit" name="btnSubmit" value="Upload File">
@@ -42,7 +42,11 @@
 	
 	<!--- step 6: Write <cfquery> to sort qContacts --->
 	
-	
+	<cfquery dbtype="query" name="qSort">
+		SELECT *
+		FROM qContacts
+		ORDER BY lastname, firstname
+	</cfquery>
 	<cfdump var="#qsort#" label="Sorted Data">
 	<cfdump var="#qContacts#" label="Original Data">
 	
