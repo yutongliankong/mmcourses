@@ -14,21 +14,29 @@
 </cfquery>
 
 <!--- step 2 --->
-
+<cfset aResult = arrayNew(1)>
 
 <!--- step 3 --->
-
+<cfset RC = "#qdata.recordcount#">
 
 <!--- step 4 --->
-
+<cfset lcolumns = "#qdata.columnlist#">
 
 <!--- step 5 (outer loop) --->
+<cfloop from="1" to="#RC#" index="i">
+	<cfset stData = structNew()>
+	<!--- step 7 (inner loop) --->
+	<cfloop list="#variables.lcolumns#" index="thiscolumn">
+		<cfset stData[variables.thiscolumn] = qdata[variables.thiscolumn][variables.i]>
+	</cfloop>
+	<!--- step 9 : arrayappend --->
+	<cfset arrayAppend(aResult,stData)>
+</cfloop>
+			
+
+<cfdump var="#aResult#">
 
 			
-			<!--- step 7 (inner loop) --->
-
-
-			<!--- step 9 : arrayappend --->
 			
 
 </body>
