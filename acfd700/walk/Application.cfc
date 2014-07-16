@@ -40,7 +40,11 @@
 	</cffunction>  
 	
 	<!--- walkthrough 5-4: Persisting CFC instances --->
-	
+	<cffunction name="cfcInitialize" access="private" hint="Cache CFCS in memory" returntype="void">
+		<cfset application.cfc = structNew()>
+		<cfobject component="#application.cfcpath#specials" name="application.cfc.specials">
+		<cfset application.cfc.specials.init(application.datasource)>
+	</cffunction>
 
 	<!--- walkthrough 2-2: Initialize Application Variables from an .INI file --->
 	<!--- onApplicationStart event --->
@@ -61,6 +65,7 @@
 			<cfset application.activesessions = 0>
 		</cfif>
 		<cflog type="information" file="#this.name#" text="application startup">
+		<cfset cfcInitialize()>
 		<cfreturn true>
 	</cffunction>
 

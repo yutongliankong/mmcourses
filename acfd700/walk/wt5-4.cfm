@@ -7,7 +7,7 @@
 <body>
 
 <!--- walkthrough 5-4 starts here --->
-
+<cfdump var="#application.cfc.specials.DailySpecials_Get()#">
 
 </body>
 </html>
