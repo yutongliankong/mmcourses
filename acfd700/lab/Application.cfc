@@ -27,7 +27,26 @@
 	</cffunction>  
 	
 	<!--- lab 5: Initialize Component Instances  --->
-	
+	<cffunction name="cfcInitialize" access="private" returntype="void" >
+		<cfset application.cfc = structNew()>
+		<cfset application.cfc.specials = createObject("Component", "#application.cfcpath#specials").init(application.datasource)>
+		<cfset application.cfc.reservation = createObject("component","#application.cfcpath#reservation").init(application.datasource)>
+		<cfset application.cfc.restaurantmenu = createObject("component","#application.cfcpath#restaurantmenu").init(application.datasource)>
+		<cfset application.cfc.contact = createObject("component","#application.cfcpath#contact").init(application.datasource)>
+		<cfset application.cfc.reservationorder = createObject("component","#application.cfcpath#reservationorder").init(application.datasource)>
+		<cfset application.cfc.template = createObject("component","#application.cfcpath#template").init(application.datasource)>
+		<cfset application.cfc.directory = createObject("component","#application.cfcpath#directory").init(application.datasource)>
+		<cfset application.cfc.category = createObject("component","#application.cfcpath#category").init(application.datasource)>
+		<cfset application.cfc.displayhandler = createObject("component","#application.cfcpath#displayhandler").init(application.datasource)>
+		<cfset application.cfc.page = createObject("component","#application.cfcpath#page").init(application.datasource, application.basepath, "http://" & cgi.http_host & application.basehref)>
+		<cfset application.cfc.recordlock = createObject("component","#application.cfcpath#recordlock").init()>
+		<cfset application.cfc.administrator = createObject("component","#application.cfcpath#administrator").init(application.datasource)>
+		<cfset application.cfc.article = createObject("component","#application.cfcpath#article").init(application.datasource, application.basepath & "xsl\", application.verityarticlecollection)>
+		<cfobject component="#application.cfcpath#toolbox" name="applicatiopn.cfc.toolbox">
+		<cfobject component="#application.cfcpath#ExternalSystems" name="application.cfc.ExternalSystems">
+		<cfobject component="#application.cfcpath#system" name="application.cfc.system">
+
+	</cffunction>
 	
 	
 	<cffunction name="onApplicationStart" returntype="boolean">
@@ -50,6 +69,7 @@
 		<cfif NOT structKeyExists(application, "activeSessions")>
 			<cfset application.activeSessions = "0">
 		</cfif>
+		<cfset cfcInitialize()>
 		<cfreturn true>
 	</cffunction>
 
@@ -57,6 +77,14 @@
 	<cffunction name="onRequestStart" returntype="boolean">
 		<!--- Unit 2 Lab --->
 		<cfargument name="targetpage" type="String" required="true" />
+		<cfif structKeyExists(url, "edit") or cgi.script_name contains "/admin/">
+			<cfinclude template="#application.cfcpath#login/mm_wizard_application_include.cfm">
+		</cfif>
+		<cfif structKeyExists(url, "logout")>
+			<cflogout>
+	
+</cflogout>	
+		</cfif>
 		<cfif isDefined("URL.init")>
 			<cfset onApplicationStart()>
 		</cfif>
