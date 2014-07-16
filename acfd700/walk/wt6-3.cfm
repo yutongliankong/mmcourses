@@ -7,6 +7,14 @@
 
 <body>
 <!--- Walkthrough 6-3 --->
+<cftry>
+	<!--- <cfinclude template="nofile.cfm"> --->
+	<cfset a = b + c>
+	<cfcatch type="any">
+		<!--- <cfdump var="#cfcatch#"> --->
+		Sorry, there was an error.<br/>
+	</cfcatch>	
+</cftry>
 
 </body>
 </html>
