@@ -187,7 +187,7 @@
 						<cfset foo = closeBrowser()>
 					<cfelse>
 						<!--- replace this URL to a page logged out users should see --->
-						<cflocation url="http://www.macromedia.com">
+						<cflocation url="http://www.macromedia.com" addtoken="no">
 					</cfif>
 			</cfif>
 		</cffunction>

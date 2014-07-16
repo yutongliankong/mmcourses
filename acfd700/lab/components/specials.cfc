@@ -7,7 +7,9 @@
 	----------------------------------------------------------------------------------------- --->
 
 	<!--- walkthrough 5-2 --->
-
+<cffunction  name="metadata_Get" returntype="struct" access="public" hint="Returns metadata about component">
+	<cfreturn getMetadata(this)>
+</cffunction>
 	<!--- ----------------------------------------------------------------------------------------
 	
 		DailySpecials_Init : Bind Datasource to CFC methods

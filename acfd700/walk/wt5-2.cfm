@@ -6,7 +6,8 @@
 </head>
 
 <body>
-
-
+	<cfinvoke component="mmcourses.acfd700.lab.components.specials" method="metadata_Get" returnvariable="stMetaData">
+</cfinvoke>
+<cfdump var="#stMetaData#">
 </body>
 </html>
