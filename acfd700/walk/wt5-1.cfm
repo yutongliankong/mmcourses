@@ -8,7 +8,8 @@
 <body>
 
 <!--- walkthrough 5-1 starts here --->
-
-
+<cfinvoke component="mmcourses.acfd700.lab.components.specials" method="dailySpecials_Get" returnvariable="qSpecials">
+	<cfinvokeargument name="datasource" value="acfd700-lab" />
+</cfinvoke>
 </body>
 </html>
