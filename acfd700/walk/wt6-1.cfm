@@ -7,6 +7,6 @@
 
 <body>
 <!--- Walkthrough 6-1 --->
-
+<cfset a = b + c >
 </body>
 </html>
