@@ -117,12 +117,20 @@
 	<cffunction name="onError" returntype="void">
 		<cfargument name="Exception" required="true">
 		<cfargument name="EventName" required="true" type="string">
+		<cflog file="ACFD700Lab" type="error" text="#arguments.eventname#|#arguments.exception.message#">
 		<cfif arguments.EventName NEQ "onSessionEnd" AND arguments.EventName NEQ "onApplicationEnd">
 			<cfoutput>
 				ERROR TYPE: #exception.rootcause.type#<BR><BR>
 				ERROR MESSAGE:#exception.rootcause.message#<br><BR>
 				ERROR DETAIL: #exception.rootcause.detail#
 			</cfoutput>
+		</cfif>
+		<cfif structkeyexists(arguments.exception,"rootcause")>
+			<cfif arguments.exception.rootcause.type contains "cafetownsend.search.googlesearch">
+				<cfoutput>
+				Google Search could not be run. Please contact your system Administrator
+				</cfoutput>
+			</cfif>
 		</cfif>
 	</cffunction>
 	
