@@ -7,9 +7,9 @@
 	----------------------------------------------------------------------------------------- --->
 
 	<!--- walkthrough 5-2 --->
-<cffunction  name="metadata_Get" returntype="struct" access="public" hint="Returns metadata about component">
-	<cfreturn getMetadata(this)>
-</cffunction>
+	<cffunction  name="metadata_Get" returntype="struct" access="public" hint="Returns metadata about component">
+		<cfreturn getMetadata(this)>
+	</cffunction>
 	<!--- ----------------------------------------------------------------------------------------
 	
 		DailySpecials_Init : Bind Datasource to CFC methods
@@ -17,7 +17,12 @@
 	----------------------------------------------------------------------------------------- --->
 	
 	<!--- walkthrough 5-3 --->
-	
+	<cffunction name="init" access="public" returntype="specials" output="false">
+		<cfargument name="dsn" required="yes" type="string" hint="datasoutce of CFC">
+		<cfset instance = structNew()>
+		<cfset instance.datasource = arguments.dsn>
+		<cfreturn this>
+	</cffunction>
 	<!--- ----------------------------------------------------------------------------------------
 	
 		DailySpecials_DefaultGet : Returns structures of component properties
@@ -34,10 +39,9 @@
 	---------------------------------------------------------------------------------------- --->
 
 	<cffunction name="dailySpecials_Get" access="public"  returntype="query" output="false">
-		<cfargument name="datasource" required="yes">
 		
 		<cfset var qgetspecials = "">
-		<cfquery name="qgetspecials" datasource="#arguments.datasource#">
+		<cfquery name="qgetspecials" datasource="#instance.datasource#">
 			select dish.dishname, 
 				   dish.dishid,
 				   dish.dishDescription,

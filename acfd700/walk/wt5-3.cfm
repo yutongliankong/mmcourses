@@ -10,6 +10,8 @@
 <body>
 
 <!--- start walkthrough here --->
-
+<cfobject component="mmcourses.acfd700.lab.components.specials" name="cfcSpecials">
+<cfset cfcSpecials = cfcSpecials.init(dsn="acfd700-lab")>
+<cfdump var="#cfcSpecials.DailySpecials_Get()#">
 </body>
 </html>
