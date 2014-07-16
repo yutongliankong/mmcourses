@@ -114,6 +114,16 @@
 		<cfset arguments.AppScope.activesessions = arguments.AppScope.activesessions - 1>
 	</cffunction>
 	<!--- Walkthrough 6-4:  Exception Handling Framework --->
-
+	<cffunction name="onError" returntype="void">
+		<cfargument name="Exception" required="true">
+		<cfargument name="EventName" required="true" type="string">
+		<cfif arguments.EventName NEQ "onSessionEnd" AND arguments.EventName NEQ "onApplicationEnd">
+			<cfoutput>
+				ERROR TYPE: #exception.rootcause.type#<BR><BR>
+				ERROR MESSAGE:#exception.rootcause.message#<br><BR>
+				ERROR DETAIL: #exception.rootcause.detail#
+			</cfoutput>
+		</cfif>
+	</cffunction>
 	
 </cfcomponent>

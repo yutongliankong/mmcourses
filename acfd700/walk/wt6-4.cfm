@@ -7,6 +7,11 @@
 
 <body>
 <!--- Walkthrough 6-4 --->
-
+<cftry>
+	<cfinclude template="nopage.cfm">
+	<cfcatch type="any">
+		<cfthrow type="ACFD700.#cfcatch.type#" message="#cfcatch.message#" detail="#cfcatch.detail#">
+	</cfcatch>
+</cftry>
 </body>
 </html>
