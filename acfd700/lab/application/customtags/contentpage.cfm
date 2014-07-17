@@ -1,4 +1,5 @@
 <cfparam name="attributes.title" default="">
+<cfinclude template="menutext.cfm">
 <cfoutput>
   <cfif thistag.executionmode EQ "Start">
   <!--- Lab 7: Step 5--->
@@ -26,13 +27,17 @@
     <tr>
         <td bgcolor="##993300" width="140" valign="top">
           <!--- Lab 7: Step 8--->
-        <a href="#application.basehref#index.cfm" class="navigation">Cuisine</a>
-      <a href="#application.basehref#" class="navigation">Articles</a>
-      <a href="#application.basehref#" class="navigation">Special Events</a>
-      <a href="#application.basehref#" class="navigation">Location</a>
-      <a href="#application.basehref#" class="navigation">Menu</a>
-      <a href="#application.basehref#contact_us.cfm" class="navigation">Contact Us</a>
-      <a href="#application.basehref#sitemap/index.cfm" class="navigation">Site Map</a>
+      <!---   <a href="#application.basehref#index.cfm" class="navigation">Cuisine</a>
+            <a href="#application.basehref#" class="navigation">Articles</a>
+            <a href="#application.basehref#" class="navigation">Special Events</a>
+            <a href="#application.basehref#" class="navigation">Location</a>
+            <a href="#application.basehref#" class="navigation">Menu</a>
+            <a href="#application.basehref#contact_us.cfm" class="navigation">Contact Us</a>
+            <a href="#application.basehref#sitemap/index.cfm" class="navigation">Site Map</a> --->
+
+            <cfloop query="qmenuchoices">
+              <a href="#application.basehref##qmenuchoices.link#" class="#qmenuchoices.class#">#qmenuchoices.display#</a>
+            </cfloop>
       </td>
      
       <td width="560" valign="top" bgcolor="##F7EEDF">

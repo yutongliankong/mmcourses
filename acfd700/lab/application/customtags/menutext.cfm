@@ -25,8 +25,16 @@
 	querysetcell(qmenuchoices,"class","navigation",6);
 	querysetcell(qmenuchoices,"display","Site Map",6);
 	//Lab 7 - Step 2
-
+	queryAddRow(qmenuchoices, 1);
+	querySetCell(qmenuchoices,"link","about/search.cfm", 7);
+	querySetCell(qmenuchoices,"class","navigation", 7);
+	querySetCell(qmenuchoices,"display","Search More", 7);
 </cfscript>
 <!--- Lab 7: Step 20--->
 
-
+<!--- <cfquery name="qMenuchoices" dbtype="query">
+	SELECT * 
+	FROM 
+		qmenuchoices 
+	ORDER BY display DESC
+</cfquery> --->
