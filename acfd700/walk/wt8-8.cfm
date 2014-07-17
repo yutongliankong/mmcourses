@@ -72,13 +72,13 @@
 <cfset formwidth="600">
 
 
-<cfform  format="flash" width="#formwidth#" height="450" id="flashform">
+<cfform  format="flash" width="#formwidth#" height="450" id="flashform" skin="haloblue">
 
-<cfformgroup type="panel" label="Reservations on #thedate# ">
-
+<cfformgroup type="panel" label="Reservations on #thedate# " style="fontFamily:Arial; font-size: large;">
+<cfformitem type="spacer" height="5" />
 <cfformgroup type="vbox" label="Reservation Information">
 
-	<cfformgroup type="horizontal" label="Name">
+	<cfformgroup type="horizontal" label="Name" style="verticalGap: 0;">
 		<cfinput type="text" name="lastname" id="lastname" size="20" maxlength="50" 
 			 required="yes" validateat="onblur"
 			 bind="{rgrid.dataProvider[rgrid.selectedIndex]['Lastname']}"
@@ -141,7 +141,11 @@
 
 </cfformgroup>
 
-<cfinput type="submit" name="btnSubmit" value="Submit Changes">
+<cfformgroup type="horizontal" style="horizontalAlign:right;">
+	<cfinput type="submit"
+		name="btnSubmit"
+		value="Submit Changes">
+</cfformgroup>
 </cfform>
 
 </body>
