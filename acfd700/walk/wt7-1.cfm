@@ -7,7 +7,29 @@
 
 <body>
 <!--- Walkthrough 7-1 --->
+<cfscript>
+	function query2array(qdata){
+		var rc = qdata.recordcount;
+		var collist = qdata.columnlist;
+		var i = 1;
+		var j = 1;
+		var thiscolumn = "";
+		var stdata = structNew();
+		var collistlength = listLen(collist);
+		var aresult = arrayNew(1);
 
+		for(i = 1; i le rc; i = i + 1){
+			stdata = structNew();
+			for(j = 1; j le collistlength; j = j + 1){
+				thiscolumn = listGetAt(collist,j);
+				stdata[thiscolumn] = qdata[thiscolumn][i];
+			}
+			arrayAppend(aresult, stdata);
+		}
+		return aresult;
+	}
+
+</cfscript>
 
 <cfscript>
 	qnames = querynew("firstname,lastname");
@@ -21,6 +43,8 @@
 	querysetcell(qnames,"lastname","Watts",2);
 
 </cfscript>
+
+<cfdump var="#query2array(qnames)#">
 
 
 
