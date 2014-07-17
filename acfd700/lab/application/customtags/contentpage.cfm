@@ -1,6 +1,6 @@
+<cfparam name="attributes.title" default="">
 <cfoutput>
-  <cfparam name="attributes.title" default="">
-  
+  <cfif thistag.executionmode EQ "Start">
   <!--- Lab 7: Step 5--->
   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
   <html>
@@ -37,7 +37,10 @@
      
       <td width="560" valign="top" bgcolor="##F7EEDF">
       <div style="padding-left: 5px">
+</cfif>
         <!--- page content goes here --->
+  <cfif thistag.executionmode EQ "end">
+  
       </div>  
       </td>
     </tr>
@@ -51,5 +54,5 @@
 
   </body>
   </html>
-
+</cfif>
 </cfoutput>
