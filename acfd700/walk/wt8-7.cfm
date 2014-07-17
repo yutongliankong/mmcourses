@@ -9,7 +9,42 @@
 <cfif isdefined("form.btnSubmit")>
 	<cfdump var="#form#">
 	<!--- 	save code goes here  --->
+	<cfset loopcount = arraylen(rgrid.rowstatus.action)>
+	<cfloop from="1" to="#loopcount#" index="i">
+		<cfswitch expression="#rgrid.rowstatus.action[i]#">
+		<cfcase value="U">
+			<cfset application.cfc.reservation.ReservationUpdate (
+				contactid = rgrid.original.contactid[i],
+				date = rgrid.original.reservationdatetime[i],
+				newreservationtime = rgrid.reservationdatetime[i],
+				numberinparty = rgrid.numberinparty[i],
+				barrived = rgrid.barrived[i],
+				updateuser = " ")
+			>
+		</cfcase>
+		<cfcase value="I">
+			<cfset application.cfc.reservation.ReservationInsert (
+				email = rgrid.email[i],
+				date = rgrid.reservationdatetime[i],
+				numberinparty = rgrid.numberinparty[i],
+				barrived = rgrid.barrived[i],
+				firstname = rgrid.firstname[i],
+				lastname = rgrid.lastname[i],
+				address1=rgrid.address1[i],
+				address2=rgrid.address2[i],
+				city = rgrid.city[i],
+				state = rgrid.state[i],
+				zipcode = rgrid.zipcode[i],
+				updateuser = " ")
+			>
+		</cfcase>
+		<cfcase value="D">
+		
+			<cfset application.cfc.reservation.ReservationDelete(contactid = rgrid.original.contactid[i], date=parsedatetime("#rgrid.original.reservationdatetime[i]#"))>
 
+		</cfcase>
+		</cfswitch>
+	</cfloop>
 </cfif>
 
 <cfset qreservations = application.cfc.reservation.Reservations_getByDate(thedate)>
@@ -37,7 +72,7 @@
 
 	<cfformgroup type="horizontal" label="Name">
 		<cfinput type="text" name="lastname" id="lastname" size="20" maxlength="50" 
-			 required="yes" validateat="onblur">
+			 required="yes" validateat="onblur" bind="{rgrid.dataProvider[rgrid.selectedIndex]['Lastname']}" onChange="rgrid.dataProvider.editField(rgrid.selectedIndex,'Lastname',lastname.text)">
 			
 		<cfinput type="text" 	name="firstname" 	size="20" maxlength="50"
 			 required="yes" validateat="onblur" bind="{rgrid.dataProvider[rgrid.selectedIndex]['Firstname']}"
@@ -72,7 +107,32 @@
 </cfformgroup>
 
 <!--- cfgrid goes here --->
-
+<cfgrid query="qreservations" name="rgrid" rowheaders="no" delete="yes" deletebutton="Delete Reservation" selectmode="edit" insert="yes" insertbutton="New Reservation">
+	<cfgridcolumn name="barrived" header="A?" type="boolean" width="30">
+	</cfgridcolumn>
+	<cfgridcolumn name="reservationdatetime" header="Time" width="150">
+	</cfgridcolumn>
+	<cfgridcolumn name="lastname" header="Last Name" select="false">
+	</cfgridcolumn>
+	<cfgridcolumn name="firstname" header="First Name" select="false">
+	</cfgridcolumn>
+	<cfgridcolumn name="email" header="Email" select="false">
+	</cfgridcolumn>
+	<cfgridcolumn name="address1" header="Address" select="false">
+	</cfgridcolumn>
+	<cfgridcolumn name="numberinparty" header="##" dataalign="right" width="20" type="numeric">
+	</cfgridcolumn>
+	<cfgridcolumn name="contactid" display="false">
+	</cfgridcolumn>
+	<cfgridcolumn name="address2" display="false">
+	</cfgridcolumn>
+	<cfgridcolumn name="city" display="false">
+	</cfgridcolumn>
+	<cfgridcolumn name="state" display="false">
+	</cfgridcolumn>
+	<cfgridcolumn name="zipcode" display="false">
+	</cfgridcolumn>
+</cfgrid>
 
 
 </cfformgroup>
