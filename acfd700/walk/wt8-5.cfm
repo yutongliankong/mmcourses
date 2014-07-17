@@ -8,11 +8,36 @@
    where articleid = #articleid#
  </cfquery>
  
+
 <cfquery name="qcategories" datasource="acfd700-lab">
-	select categoryid,categoryname
-	from category
-	where endtime is null
+  SELECT 
+  	category.categoryid,
+  	categoryname,1 AS bChecked
+  FROM 
+  	category, 
+  	articlecategory 
+  WHERE category.categoryid = articlecategory.categoryid
+	AND  articlecategory.articleid = #articleid#
+	  AND category.endtime is null
+	
+	UNION
+	
+	SELECT 
+		categoryid, 
+		categoryname, 
+		0 AS bchecked
+	FROM 
+		category
+	WHERE category.categoryid not IN (
+		SELECT categoryid
+		FROM articlecategory
+		WHERE articleid = #articleid#
+	)
+	AND endtime is null
+
+ 	ORDER BY categoryname
 </cfquery>
+
 
 
 
@@ -53,22 +78,26 @@
 					size="30" 
 					maxlength="50" 
 					title="Dish Name"
+					value="#qArticle.Title#"
 					label="Dish Name" 
 					validateat="onSubmit"  required="yes"  message="You must enter the name of the dish">
 					
-			<cftextarea name="teaser" rows="5" cols="30" label="Description" required="no" ></cftextarea>
+			<cftextarea name="teaser" rows="5" cols="30" label="Description" value="#qArticle.Teaser#" required="no" ></cftextarea>
 		</cfformgroup>
 
 		<cfformgroup type="page" label="Full Text" height="300" width="#formwidth#">
-				<cftextarea name="fulltext" rows="15" cols="40" label="Full Text" required="yes" message="You must enter article text"></cftextarea>
+				<cftextarea name="fulltext" rows="15" cols="40" label="Full Text"  value="#qArticle.Fulltext#" required="yes" message="You must enter article text"></cftextarea>
 		</cfformgroup>
 	
 	<cfformgroup type="page" label="Categorize" height="300" width="#formwidth#">
 		<cfformgroup type="repeater" query="qcategories">
 			<cfinput type="checkbox"
 			 name="categoryid" 
+			 value="{qcategories.currentItem.bChecked}"
 			label="{qcategories.currentItem.categoryname}" height="15">	
 		</cfformgroup>
+		<cfinput type="hidden" name="lcheckboxids" value="#valuelist(qcategories.categoryid)#">
+	
 	</cfformgroup>
 		
 	<cfformgroup type="page" label="Publishing Options" height="300" width="#formwidth#">
@@ -82,7 +111,7 @@
 				<cfselect name="publishtimehour" width="50" >
 					<cfloop from="1" to="12" index="i">
 						<cfoutput>
-							<option value="#i#">#i#</option>
+							<option value="#i#" <cfif isDate(qarticle.publishdate) and (i eq hour(qarticle.publishdate)) or(hour(qarticle.publishdate) - 12 EQ i)>selected</cfif> >#i#</option>
 						</cfoutput>
 					</cfloop>
 				</cfselect>
@@ -90,14 +119,19 @@
 				<cfselect name="publishminute" width="50">
 					<cfloop from="0" to="59" index="i">
 						<cfoutput>
-							<option value="#iif(i lt 10,"0 & i",DE(i))#">#iif(i lt 10,"0 & i",DE(i))#</option>
+							<option value="#iif(i lt 10,"0 & i",DE(i))#" 
+								<cfif isdate(qarticle.publishdate) and
+									i eq minute(qarticle.publishdate)>selected
+								</cfif>>#iif(i lt 10,"0 & i",DE(i))#</option>
 						</cfoutput>
 					</cfloop>
 				</cfselect>
 
 				<cfselect name="publishampm" width="50">
-						<option value="AM">AM</option>
-						<option value="PM">PM</option>
+						<option value="AM" 
+							<cfif isdate(qarticle.publishdate) and hour(qarticle.publishdate) lt 12>selected</cfif>>AM</option>
+						<option value="PM" 
+							<cfif isdate(qarticle.publishdate) and hour(qarticle.publishdate) ge 12>selected</cfif>>PM</option>
 				</cfselect>
 				
 			</cfformgroup>
@@ -110,24 +144,32 @@
 						 startrange="#dateformat(dateadd('d',-1,now()),"mm/dd/yyyy")#">
 				
 				<cfselect name="exptimehour" width="50" >
-					<cfloop from="1" to="12" index="i">
-						<cfoutput>
-							<option value="#i#">#i#</option>
-						</cfoutput>
-					</cfloop>
-				</cfselect>
+  				<cfoutput>
+  				<cfloop from="1" to="12" index="i">
+      				<option value="#i#" 
+	  					<cfif isdate(qarticle.expdate) and (hour(qarticle.expdate) is i or (hour(qarticle.expdate) - 12 is i))>			selected
+						</cfif>
+	  				>#i#</option>
+  				</cfloop>
+  				</cfoutput>
+  				</cfselect>
 					
 				<cfselect name="exptimeminute" width="50">
 					<cfloop from="0" to="59" index="i">
 						<cfoutput>
-							<option value="#iif(i lt 10,"0 & i",DE(i))#">#iif(i lt 10,"0 & i",DE(i))#</option>
+							<option value="#iif(i lt 10,"0 & i",DE(i))#"
+							<cfif isdate(qarticle.expdate) and
+								i eq minute(qarticle.expdate)>selected
+							</cfif>>#iif(i lt 10,"0 & i",DE(i))#</option>
 						</cfoutput>
 					</cfloop>
 				</cfselect>
 
 				<cfselect name="exptimeampm" width="50">
-						<option value="AM">AM</option>
-						<option value="PM">PM</option>
+						<option value="AM" 
+							<cfif isdate(qarticle.expdate) and hour(qarticle.expdate) lt 12>selected</cfif>>AM</option>
+						<option value="PM"
+							<cfif isdate(qarticle.expdate) and hour(qarticle.expdate) ge 12>selected</cfif>>PM</option>
 				</cfselect>
 				
 			</cfformgroup>
