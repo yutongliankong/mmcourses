@@ -55,7 +55,11 @@
 		</cfformgroup>
 	
 	<!--- wt 8-4: Checkboxes --->
-	
+	<cfformgroup type="page" label="Categorize" height="300" width="#variables.formwidth#">
+		<cfformgroup type="Repeater" query="qCategories">
+			<cfinput type="checkbox" name="categoryid" label="{qCategories.currentItem.categoryname}" height="15">
+		</cfformgroup>
+	</cfformgroup>
 	
 		
 	<cfformgroup type="page" label="Publishing Options" height="300" width="#formwidth#">
