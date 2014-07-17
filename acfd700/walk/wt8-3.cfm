@@ -16,8 +16,16 @@
 <!--- walkthrough 2 --->
 <cfset formwidth="600">
 
-<cfform  format="flash" width="#formwidth#" height="400" id="flashform">
+<cfform  format="flash" width="#formwidth#" height="450" id="flashform">
+	
+	<cfinput type="hidden"
+		name="publishdatetime"
+		bind="{publishdate.text}{publishtimehour.value}:{publishminute.value}{publishampm.value}">
 
+	<cfinput type="hidden" 
+		name="expdatetime"
+		bind="{expdate.text}{exptimehour.value}:{exptimeminute.value}{exptimeampm.value}">
+	<cfformgroup type="Panel" label="Now Editing: {title.text}">
 	<cfformgroup type="tabnavigator">
 	
 		<cfformgroup type="page" label="Name / Teaser" height="300" width="#formwidth#">		
@@ -105,7 +113,7 @@
 		<cfinput type="submit" name="btnSubmit" value="Save" id="btnSubmit" label="Save">
 		<cfinput type="reset" name="btnReset" value="Reset" id="btnReset" label="Reset">
 	</cfformgroup>
-	
+</cfformgroup>	
 </cfform>
 
 <!--- end walkthrough 2 --->
